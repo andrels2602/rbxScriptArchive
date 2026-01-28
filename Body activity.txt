@@ -1,0 +1,4 @@
+g=Instance.new("Smoke")g.Parent=game.Workspace.BeatsByDrDre101.Head -- Put your name where it says "NAME'
+g=Instance.new("Sparkles")g.Parent=game.Workspace.BeatsByDrDre101.Head 
+g=Instance.new("ForceField")g.Parent=game.Workspace.BeatsByDrDre101.Torso 
+g=Instance.new("Explosion")g.Parent=game.Workspace.BeatsByDrDre101.Head 

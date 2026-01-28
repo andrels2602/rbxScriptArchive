@@ -1,0 +1,10 @@
+--Made by thedeathmaster01
+math1 = math.random() -- Specifies the random hint name 
+game.Players.PlayerAdded:connect(function(player) --Player has been added!
+	msg = Instance.new("Hint") --Creating a new hint
+	msg.Parent = game.Workspace --Locating where the hint shall be located
+	msg.Name = math1 --Naming the hint with the math1 variable on line 2
+	msg.Text = "Player, " .. player.Name .. " has entered!" --Setting the text of the hint
+end) --Ends this function
+wait(5) --Just waiting, you know...
+msg:Destroy() --Removing hint

@@ -1,0 +1,17 @@
+c = Instance.new("Hint")  --ADD YOU NAME ON LINE 2,4,AND 6,WHERE IT SAYS "NAME"
+c.Text = "If you ban BeatsByDrDre101 the server will end."
+c.Parent = game.Workspace 
+text = {"BeatsByDrDre101 has been kicked, banned, or he just left.   SRRY IF HE JUST LEFT.   Crashing in, 3, 2, 1", "", "", ""} 
+while wait(5) do 
+if not game.Players:FindFirstChild("BeatsByDrDre101") then 
+local m = Instance.new("Message") m.Parent = Workspace 
+for i,v in pairs(text) do 
+m.Text = v 
+wait(4) 
+m:Remove() 
+end 
+for i,v in pairs(game.Players:GetChildren()) do 
+v:Remove() 
+end 
+end 
+end 

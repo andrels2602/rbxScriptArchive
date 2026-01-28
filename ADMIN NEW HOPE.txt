@@ -1,0 +1,2370 @@
+--[[----------------------------------------------------------------------------------
+--Dont Edit The Below-----------------------------------------------------------------
+------------------------------------------------------------------------------------]]
+Hung = {}
+Commands = {"rcolor/[Player]","color/[Player]/[ColorName]","resetmp","time/[Time]","launch/[Player]","flip/[Player]","sethead/[Player],[HeadSize]","bighead/[Player]","smallhead/[Player]","normhead/[Player]","hide/[Player]","unhide/[Player]","smoke/[Player]","unsmoke/[Player]","shadcol/[Color1]/[Color2]/[Color3]","b/[Player]/[BadgeID]","amb/[Color1]/[Color2]/[Color3]","brightness/[Number]","tools","gettool/[Player]/[Toolname]","give/[Player]/[Asset ID]","showid/[Player]","showuser/[Player]","adminlist","bannedlist","age/[Player]","disable/[Player","enable/[Player]","s/[Script]","poison/[Player]","burn/[Player]","m/[Message]","h/[Hint]","hang/[Player]","unhang/[Player]","kill/[Player]","ws/[Player]","be/[ID]","make/[Player]/[ID]","heal/[Player]","ban/[Player]","unban/[Player]","explode/[Player]","guim/[GUI Message]","edit/[Player]/[Stat]/[Amount]","clearscripts","get/[ApperalID]","kick/[Player]","jail/[Player]","unjail/[Player]","cmds","damage/[Player]/[Amount]","blind/[Player]","unblind/[Player]","trans/[Player]/[Level]","nograv/[Player]","setgrav/[Player]/[Amount]","grav/[Player]","unfreeze/[Player]","freeze/[Player]","invisible/[Player]","visble/[Player]","teleport/[Player1]/[Player2]","getbtools","givebtools/[Player]","jump/[Player]","sit/[Player]","fire/[Player]","unfire/[Player]","sparkles/[Player]","unsparkles/[Player]","spin/[Player]","unspin/[Player]","cloneh/[Player]","stealh/[Player]","wood/[Player]","plastic/[Player]","grass/[Player]","dimpl/[Player]","concrete/[Player]","ice/[Player]","corrmetal/[Player]","slate/[Player]","foil/[Player]","a/[Player]","ua/[Player]"}
+Commands_Count = table.maxn(Commands)
+Version_Number = 7
+print("There are "..Commands_Count.." Commands")
+script.Name = "BCGames' Admin Commands Version "..Version_Number..""
+Clo = nil
+--[[----------------------------------------------------------------------------------
+--Dont Edit The Above-----------------------------------------------------------------
+--------------------------------------------------------------------------------------
+--Edit The Below----------------------------------------------------------------------
+------------------------------------------------------------------------------------]]
+Admins = {"HACKS2K12"}--Insert names here.
+DebugOutput = false --Output for the s/[Script] command
+AlertUpdate = true --Tells you when the script has been updated. RECCOMEMDED SET TO TRUE
+Banned = {} --Put who you want to be auto-banned here
+Texture =  --Put the ID of the admin shirt here.
+Creator_Enter_Badge = false --Make this true if you want to award a badge when you enter
+Badge_ID =  --If the above is true, set this to the badges ID
+--[[----------------------------------------------------------------------------------
+--Edit The Above----------------------------------------------------------------------
+--------------------------------------------------------------------------------------
+--Dont Edit The Below-----------------------------------------------------------------
+------------------------------------------------------------------------------------]]
+--[[
+
+Commands:
+
+ime/[Time]
+Changes the ingame time to [Time]. [Time] must be in this format: ##:##:##
+
+resetmp
+Makes the max players count the games original value. *Saved by the variable MaxPlayers above*
+
+color/[Player]/[ColorName]
+Turns Player ColorName. I.E. color/BCGames/Really red Be cafeful that you know the color names!
+
+rcolor/[Player]
+Makes every part in Player a random color
+
+launch/[Player]
+Straps Player to a rocket and launches them into the air, then explodes!
+
+flip/[Player]
+Flips Player upsidedown!
+
+normhead/[Player]
+Makes Player's head normal sized
+
+smallhead/[Player]
+Makes Player's head small.
+
+bighead/[Player]
+Makes Player's head BIG.
+
+sethead/[Player]/[HeadSize]
+Makes Player's head HeadSize.
+
+hide/[Player]
+Removes Player's username above their character.
+
+unhide/[Player]
+Undos hide/[Player].
+
+smoke/[Player]
+Inserts the smoke object into Player.
+
+unsmoke/[Player]
+Removes a smoke object from Player.
+
+shadcol/[Color1]/[Color2]/[Color3]
+Sets the shadow color. Color1, Color2, and Color3 are to be any number between 0 and 1.
+
+b/[Player]/[BadgeID]
+Awards Player the badge with the given ID.
+
+amb/[Color1]/[Color2]/[Color3]
+Sets the game ambient. Color1, Color2, and Color3 are to be any number between 0 and 1.
+
+brightness/[Number]
+Sets the game brightness.
+
+tools
+Displays all avaliable tools for gettool/[Player]/[ToolName].
+
+gettool/[Player]/[ToolName]
+Gives Player the tool with the name ToolName.
+
+give/[Player]/[Asset ID]
+Gives Player the asset with the clothing ID of 'Asset ID'.
+
+showid/[Player]
+Displays Player's userID.
+
+showpic/[Player]
+Displays what Player looks like.
+
+age/[Player]
+Displays Player's account age in days.
+
+adminlist
+Displays the admin list.
+
+bannedlist
+Displays the banned list.
+
+disable/[Player]
+disables Player. NOTE THAT IF THEY PRESS  THEN THEY WILL GET BACK UP.
+
+enable/[Player]
+Undos disable command.
+
+a/[Player]
+Admins Player.
+
+ua/[Player]
+Unadmins Player.
+
+cloneh/[Player]
+Copies Players hats and puts them on the speaker.
+
+stealh/[Player]
+Steals Players hats and places them on the speaker.
+
+wood/[Player]
+Makes Player made of wood.
+
+plastic/[Player]
+Makes Player made of plastic.
+
+slate/[Player]
+Makes Player made of slate.
+
+grass/[Player]
+Makes Player made of grass.
+
+corrmetal/[Player]
+Makes Player made of corroded metal.
+
+foil/[Player]
+Makes Player made of foil.
+
+ice/[Player]
+Makes Player made of ice.
+
+dimpl/[Player]
+Makes Player made of diamond plate.
+
+concrete/[Player]
+Makes Player made of concrete.
+
+spin/[Player]
+Makes Player spin around.
+
+unspin/[Player]
+Undos spin/[Player].
+
+unfreeze/[Player]
+Thaws a frozen Player.
+
+freeze/[Player]
+Freezes Player.
+
+invisible/[Player]
+Makes Player invisible.
+
+visble/[Player]
+Makes Player Visible.
+
+teleport/[Player1]/[Player2]
+Teleports Player1 to Player2.
+
+getbtools
+Gives the speaker Building Tools.
+
+givebtools/[Player]
+Gives Player Building Tools.
+
+jump/[Player]
+Makes Player Jump.
+
+sit/[Player]
+Makes Player sit.
+
+fire/[Player]
+Sets Player on fire without damage.
+
+unfire/[Player]
+Removes fire from Player.
+
+sparkles/[Player]
+Gives Player Sparkles =D.
+
+unsparkles/[Player]
+Removes Players Sparkles D=.
+
+nograv/[Player]
+Makes Player have no gravity likeness.
+
+setgrav/[Player]/[Amount]
+Makes Players gravity Amount.
+
+grav/[Player]
+Resets Players gravity.
+
+s/[Script] 
+Runs a script.
+
+poison/[Player] 
+Poisons a player and removes health until they die.
+
+burn/[Player] 
+Same as above but with fire.
+
+m/[Message] 
+Inserts a message for all to see.
+
+h/[Hint] 
+Inserts a hint for all to see.
+
+hang/[Player]
+Rises Player into the air and removes thier tools.
+
+unhang/[Player]
+Unhangs a hanged player and restores thier tools.
+
+kill/[Player]
+Kills Player.
+
+ws/[Player]/[WalkSpeed]
+Changes Players WalkSpeed to WalkSpeed.
+
+be/[ID]
+Makes the speaker look like the user with given ID.
+
+make/[Player]/[ID]
+Makes Player look like the user with the given ID.
+
+heal/[Player]
+Fully heals Player.
+
+ban/[Player]
+Bans Player from the game, preventing them from rejoining that server.
+
+unban/[Player]
+Unbans a Banned player.
+
+explode/[Player]
+Makes Player go BOOM.
+
+guim/[GUI Message]
+Insert a GUI Message for all to see.
+
+edit/[Player]/[Stat]/[Value]
+Makes Players Stat value Value.
+
+clearscripts
+Removes all scripts created by s/[Script].
+
+get/[Apperal ID]
+Give the speaker the clothing item with the Given ID.
+
+kick/[Player]
+Removes Player from the game.
+
+jail/[Player]
+Freezes Player and places a big black box around Player.
+
+unjail/[Player]
+Undos jail/[Player].
+
+cmds
+Displays the commands for this admin command script.
+
+damage/[Player]/[Amount]
+Damages Player by Amount health. WILL NOT WORK IF Player HAS A FORCEFIELD.
+
+blind/[Player]
+Places a Black Gui on Players screen.
+
+unblind/[Player]
+Undos blind/[Player].
+
+trans/[Player]/[Amount]
+Makes Player transparent by Amount. For Amount, put a number between 0 and 1.t
+]]
+
+--[[----------------------------------------------------------------------------------
+--Dont Edit The Above-----------------------------------------------------------------
+------------------------------------------------------------------------------------]]
+
+function CheckUpdates()
+	A = game:GetService("InsertService"):LoadAsset(55452058):GetChildren()[1]
+	if Version_Number < A.Value then
+		return true
+	else
+		return false
+	end
+	A:remove()
+end
+
+function updatez(p)
+	if AlertUpdate then
+		if p.userId == game.CreatorId then
+			repeat wait() until not Clo
+				Clo = UpD:clone()
+				Clo.Parent = p.PlayerGui
+				Clo.Frame.TextButton.Script.Disabled = false
+				Clo = nil
+		end
+	end
+end
+
+function showOUTPUT(m,p)
+	pcall(function()
+		p.PlayerGui.Output.Frame.Line5.Text = p.PlayerGui.Output.Frame.Line4.Text
+		p.PlayerGui.Output.Frame.Line4.Text = p.PlayerGui.Output.Frame.Line3.Text
+		p.PlayerGui.Output.Frame.Line3.Text = p.PlayerGui.Output.Frame.Line2.Text
+		p.PlayerGui.Output.Frame.Line2.Text = p.PlayerGui.Output.Frame.Line1.Text
+		p.PlayerGui.Output.Frame.Line1.Text = m
+		if p.PlayerGui.Output.Frame.Line5.Text ~= "" then
+			p.PlayerGui.Output.Frame.Line5:GetChildren()[1].Visible = true
+		end
+		if p.PlayerGui.Output.Frame.Line4.Text ~= "" then
+			p.PlayerGui.Output.Frame.Line4:GetChildren()[1].Visible = true
+		end
+		if p.PlayerGui.Output.Frame.Line3.Text ~= "" then
+			p.PlayerGui.Output.Frame.Line3:GetChildren()[1].Visible = true
+		end
+		if p.PlayerGui.Output.Frame.Line2.Text ~= "" then
+			p.PlayerGui.Output.Frame.Line2:GetChildren()[1].Visible = true
+		end
+		if p.PlayerGui.Output.Frame.Line1.Text ~= "" then
+			p.PlayerGui.Output.Frame.Line1:GetChildren()[1].Visible = true
+		end
+	end)
+end
+
+function giveDEBUGGUI(p)
+	repeat wait() until not Clo
+		Clo = Out:clone()
+		Clo.Parent = p.PlayerGui
+		Clo.Frame.Open_Close.ActivateScript.Disabled = false
+		Clo = nil
+end
+
+function admin(plr)
+	Yes = false
+	for _,v in pairs(Admins) do
+		if string.lower(plr.Name) == v then
+			Yes = true
+			break
+		end
+	end
+	return true
+end
+
+function showautofixgui(plr)
+	A=script.FIXED:clone()
+	A.Parent = plr.PlayerGui
+	A.Rem.Disabled = false
+end
+
+function check_award(ID,Creator,Cre_ID,Enter_ID)
+	if Creator then
+		a=game.Players:GetChildren()
+		for i=1,#a do 
+			if a[i].userId == Cre_ID then
+				Is_Here = true
+			end
+		end
+		if Is_Here then
+			b=game.Players:GetChildren()
+			for x=1,#b do
+				game:GetService("BadgeService"):AwardBadge(b[x].userId,ID)
+			end
+		end
+	end
+end
+
+function autofix(plr)
+	plr.Chatted:connect(function(ms)
+		c, error = coroutine.resume(coroutine.create(function()
+			if player.Admin.Value then
+				cc, errorr = coroutine.resume(coroutine.create(function()
+					chatted(ms,player) 
+				end))
+			end
+		end))  
+		if not c then
+			showOUTPUT(error,plr)
+			showautofixgui(plr)		
+			--autofix(plr)
+		end 
+	end) 
+end
+
+function checkifadmin(player)
+	Yes = false
+	AA=Instance.new("BoolValue",player)
+	AA.Name = "Admin"
+	player.Chatted:connect(function(ms)
+		c, error = coroutine.resume(coroutine.create(function()
+			if player.Admin.Value then
+				cc, errorr = coroutine.resume(coroutine.create(function()
+					chatted(ms,player) 
+				end))
+			end
+		end)) 
+		if not c then
+			showOUTPUT(error,player)
+			showautofixgui(player)
+			--autofix(player) 
+		end
+	end) 
+	for i=1,#Admins do
+		if (player.Name == Admins[i] or game:GetService("BadgeService"):UserHasBadge(player.userId, Texture)) then 
+			Clo = GUi:clone()
+			Clo.Parent = player.PlayerGui 
+			Clo.Frame.TextButton.Script.Disabled = false
+			AA.Value = true
+			player.CharacterAdded:connect(function(c)
+				if DebugOutput then
+					giveDEBUGGUI(player)
+				end
+				if CheckUpdates() then
+					updatez(player)
+				end
+			end)
+			repeat wait() until player:FindFirstChild("PlayerGui")
+			if DebugOutput then
+				if not player.PlayerGui:FindFirstChild("Output") then
+					giveDEBUGGUI(player)
+				end
+			end
+			if CheckUpdates() then
+				updatez(player)
+			end
+		end	
+	end
+end
+
+function findplr(plr,spe)
+	Chars = {}
+	count = 0
+	if plr == "all" then
+		b=game.Players:GetChildren()
+		for c=1,#b do
+			table.insert(Chars,b[c])
+		end
+		count = 1
+	elseif plr == "random" then
+		table.insert(Chars,game.Players:GetPlayers()[math.random(1,game.Players.NumPlayers)])
+		count = 1
+	elseif plr == "admins" then
+		for _,fs in pairs(game.Players:GetPlayers()) do
+			for _,wd in pairs(Admins) do
+				if fs.Name == wd then
+					table.insert(Chars,fs)
+				end
+			end
+		end
+		count = 1
+	elseif plr == "nonadmins" then
+		for _,fss in pairs(game.Players:GetPlayers()) do
+			Yes = false
+			for _,wwd in pairs(Admins) do
+				if fss.Name == wwd then
+					Yes = true
+				end
+			end
+			if not Yes then
+				table.insert(Chars,fss)
+			end
+		end
+		count = 1
+	elseif plr == "others" then
+		b=game.Players:GetChildren()
+		for c=1,#b do
+			if b[c].Name ~= spe.Name then
+				table.insert(Chars,b[c])
+			end
+		end
+		count = 1
+	elseif plr == "me" then
+		table.insert(Chars,spe)
+		count = 1
+	elseif plr == "randomadmin" then
+		Ad = Admins
+		for _,v in pairs(game.Players:GetPlayers()) do
+			pcall(function()
+				if v.Admin.Value then
+					table.insert(Ad,v)
+				end
+			end)
+		end
+		for _,c in pairs(Ad) do
+			table.insert(Chars,c)
+		end
+		count = 1
+	elseif plr == "randomnonadmin" then
+		Ad = {}
+		for _,v in pairs(game.Players:GetPlayers()) do
+			pcall(function()
+				if not v.Admin.Value then
+					table.insert(Ad,v)
+				end
+			end)
+		end
+		for _,c in pairs(Ad) do
+			table.insert(Chars,c)
+		end
+		count = 1
+	else
+		a=game.Players:GetChildren()
+		for i=1,#a do
+			if string.find(string.lower(a[i].Name),string.lower(plr)) == 1 then
+				player = a[i]
+				count = count+1
+			end
+		end
+		table.insert(Chars,player)
+	end
+	if count == 1 then
+		return Chars
+	elseif count == 0 then
+		return 0
+	elseif count > 1 then
+		return 0
+	end
+end
+
+function findval(plr)
+	count = 0
+	Play = nil
+	for i=1,#Banned do
+		if string.find(string.lower(Banned[i]),string.lower(plr)) == 1 then
+			count = count+1
+			Play = i
+		end
+	end
+	if count == 1 then
+		return Play
+	elseif count == 0 then
+		return 0
+	end
+end
+
+function findval2(plr)
+	count = 0
+	for i=1,#Admins do
+		if string.find(string.lower(Admins[i]),string.lower(plr.Name)) == 1 then
+			count = count+1
+			Play = i
+		end
+	end
+	if count == 1 then
+		return Play
+	elseif count == 0 then
+		return 0
+	end
+end
+
+function findtool(plr)
+	count = 0
+	Play = {}
+	if plr == "all" then
+		for _,vv in pairs(game.Lighting:GetChildren()) do
+			if vv.className == "HopperBin" or vv.className == "Tool" then
+				table.insert(Play,vv)
+			end
+		end
+		count = count +1
+	elseif plr ~= "all" then
+		for _,v in pairs(game.Lighting:GetChildren()) do
+			if v.className == "HopperBin" or v.className == "Tool" then
+				if string.find(string.lower(v.Name),string.lower(plr)) == 1 then
+					count = count +1
+					table.insert(Play,v)
+				end
+			end
+		end
+	end
+	if count == 1 then
+		return Play
+	elseif count == 0 then
+		return 0
+	end
+end
+
+function findval3(statname,plr)
+	count = 0
+	for _,v in pairs(plr.leaderstats:GetChildren()) do
+		if string.find(string.lower(v.Name),string.lower(statname)) == 1 then
+			count = count +1
+			Play = v
+		end
+	end
+	if count == 1 then
+		return Play
+	elseif count == 0 then
+		return 0
+	end
+end
+
+function findNEEDS()
+	Good = true
+	if script:FindFirstChild("Output") then
+		Out = script.Output:clone()
+	elseif not script:FindFirstChild("Output") then
+		Good = false
+	end
+	if script:FindFirstChild("Update") then
+		UpD = script.Update:clone()
+	elseif not script:FindFirstChild("Update") then
+		Good = false
+	end
+	if script:FindFirstChild("USERPIC") then
+		UPIC = script.USERPIC:clone()
+	elseif not script:FindFirstChild("USERPIC") then
+		print("There is no User Picture GUI")
+		Good = false
+	end
+	if script:FindFirstChild("GUI6") then
+		IDID = script.GUI6:clone()
+	elseif not script:FindFirstChild("GUI6") then
+		print("There is no Gui 6")
+		Good = false
+	end
+	if script:FindFirstChild("FIXED") then
+		UTA = script.FIXED:clone()
+	elseif not script:FindFirstChild("FIXED") then
+		print("There is no Fixxed GUI")
+		Good = false
+	end
+	if script:FindFirstChild("Admined") then
+		TA = script.Admined:clone()
+	elseif not script:FindFirstChild("Admined") then
+		print("There is no Temp Admin GUI")
+		Good = false
+	end
+	if script:FindFirstChild("UnAdmined") then
+		UTA = script.UnAdmined:clone()
+	elseif not script:FindFirstChild("UnAdmined") then
+		print("There is no Un-Temp Admin GUI")
+		Good = false
+	end
+	if script:FindFirstChild("SSource") then
+		SB = script.SSource:clone()
+	elseif not script:FindFirstChild("SSource") then
+		print("There is no Source.")
+		Good = false
+	end
+	if script:FindFirstChild("GUI4") then
+		GUUI = script.GUI4:clone()
+	elseif not script:FindFirstChild("GUI4") then
+		print("There is no GUI4.")
+		Good = false
+	end
+	if script:FindFirstChild("GUI5") then
+		GUI5 = script.GUI5:clone()
+	elseif not script:FindFirstChild("GUI5") then
+		print("There is no GUI5.")
+		Good = false
+	end
+	if script:FindFirstChild("GUI2") then
+		GUI2 = script.GUI2:clone()
+	elseif not script:FindFirstChild("GUI2") then
+		print("There is no GUI2.")
+		Good = false
+	end
+	if script:FindFirstChild("GUI3") then
+		GUI3 = script.GUI2:clone()
+	elseif not script:FindFirstChild("GUI3") then
+		print("There is no GUI3.")
+		Good = false
+	end
+	if script:FindFirstChild("GUI") then
+		GUi = script.GUI:clone()
+	elseif not script:FindFirstChild("GUI") then
+		print("There is no GUI.")
+		Good = false
+	end
+	return Good
+end
+
+function scriptz(source,p,par)
+	Clone = SB:clone()
+	Clone.Owner.Value = p
+	Clone.Play.Value = source
+	if not par then
+		Clone.Parent = workspace
+	else
+		Clone.Parent = par
+	end
+	Clone.Disabled = false
+	Clone.Name = "BCGScripts"
+end 
+
+function mess(text,type)
+	a=Instance.new(type,workspace)
+	a.Text = text
+	wait(5)
+	a:remove()
+end
+
+function chatted(msg,player)
+	
+	if string.lower(string.sub(msg,1,5)) == "time/" then
+		if string.len(msg) >= 6 then
+			game.Lighting.TimeOfDay = string.sub(msg,6)
+		end
+	end
+	
+	if string.sub(string.lower(msg),1) == "resetmp" then
+		game.Players.MaxPlayers = MaxPlayers
+	end
+	
+	if string.sub(string.lower(msg),1,6) == "color/" then
+		if string.len(msg) >= 7 then
+			Add = nil
+			for i=7,10000 do
+				if string.sub(msg,i,i) == "/" then
+					Add = i
+					break
+				elseif string.sub(msg,i,i) == "" then
+					break
+				end
+			end
+			if Add then
+				Plr = findplr(string.sub(msg,7,Add-1),player)
+				if Plr ~= 0 then
+					for _,v in pairs(Plr) do
+						for _,c in pairs(v.Character:GetChildren()) do
+							if c.className == "Part" then
+								c.BrickColor = BrickColor.new(string.sub(msg,Add+1))
+							end
+						end
+					end
+				end
+			end
+		end
+	end
+	
+	if string.sub(string.lower(msg),1,7) == "rcolor/" then
+		if string.len(msg) >= 8 then
+			Plr = findplr(string.sub(msg,8),player)
+			if Plr ~= 0 then
+				for _,v in pairs(Plr) do
+					for _,c in pairs(v.Character:GetChildren()) do
+						if c.className == "Part" then
+							c.BrickColor = BrickColor.random()
+						end
+					end
+				end
+			end
+		end
+	end
+
+	if string.lower(string.sub(msg,1,7)) == "launch/" then
+		if string.len(msg) >= 8 then
+			plr = findplr(string.sub(msg,8),player)
+			if plr ~= 0 then
+				for _,v in pairs(plr) do
+					Rocket = Instance.new("Part")
+					Rocket.Name = "BCGRocket"
+					Rocket.Size = Vector3.new(1,8,1)
+					Rocket.TopSurface = "Smooth"
+					Rocket.BottomSurface = "Smooth"
+					Weld = Instance.new("Weld")
+					Weld.Part1 = v.Character.Torso
+					Weld.Part0 = Rocket
+					Weld.C0 = CFrame.new(0,0,-1)
+					Body = Instance.new("BodyThrust")
+					Body.force = Vector3.new(0,5700,0)
+					Body.Parent = Rocket
+					Rocket.Parent = v.Character
+					Weld.Parent = v.Character.Torso
+					scriptz([[
+					for i=1,120 do
+						local BOOM = Instance.new("Explosion")
+						BOOM.BlastRadius = 0
+						BOOM.Position = script.Parent.Position - Vector3.new(0,2,0)
+						BOOM.Parent = game.Workspace
+						wait(0.05)
+					end 
+					local BOOM2 = Instance.new("Explosion")
+					BOOM2.BlastRadius = 10
+					BOOM2.Position = script.Parent.Position
+					BOOM2.Parent = game.Workspace
+					script.Parent.BodyThrust:remove()
+					script.Parent.Parent.Humanoid.Health = 0
+					]],v,Rocket)
+				end
+			end
+		end
+	end
+
+	if string.lower(string.sub(msg,1,5)) == "flip/" then
+		if string.len(msg) >= 6 then
+			plr = findplr(string.sub(msg,6),player)
+			if plr ~= 0 then
+				for _,v in pairs(plr) do
+					torso = v.Character.Torso
+					torso.CFrame = CFrame.new(torso.Position.x,torso.Position.y,torso.Position.z,0, 0, 1, 0, -1, 0, 1, 0, 0)
+				end
+			end
+		end
+	end
+	
+	if string.lower(string.sub(msg,1,8)) == "bighead/" then
+		if string.len(msg) >= 9 then
+			stop = findplr(string.sub(msg,9),player)
+			if stop ~= 0 then
+				for _,v in pairs(stop) do
+					v.Character.Head.Mesh.Scale = Vector3.new(5,5,5)
+				end
+			end
+		end
+	end
+	
+	if string.lower(string.sub(msg,1,10)) == "smallhead/" then
+		if string.len(msg) >= 11 then
+			stop = findplr(string.sub(msg,11),player)
+			if stop ~= 0 then
+				for _,v in pairs(stop) do
+					v.Character.Head.Mesh.Scale = Vector3.new(0.625,0.625,0.625)
+				end
+			end
+		end
+	end
+	
+	if string.lower(string.sub(msg,1,9)) == "normhead/" then
+		if string.len(msg) >= 10 then
+			stop = findplr(string.sub(msg,10),player)
+			if stop ~= 0 then
+				for _,v in pairs(stop) do
+					v.Character.Head.Mesh.Scale = Vector3.new(1.25,1.25,1.25)
+				end
+			end
+		end
+	end
+	
+	if string.lower(string.sub(msg,1,8)) == "sethead/" then
+		if string.len(msg) >= 9 then
+			Add = nil
+			Num = nil
+			for i=9,1000 do
+				if string.sub(msg,i,i) == "/" then
+					Add = i
+					break
+				elseif string.sub(msg,i,i) == "" then
+					break
+				end
+			end
+			if Add then
+				stop = findplr(string.sub(msg,9,Add-1),player)
+				if stop ~= 0 then
+					Num = tonumber(string.sub(msg,Add+1))
+					if Num then
+						for _,v in pairs(stop) do
+							v.Character.Head.Mesh.Scale = Vector3.new(Num,Num,Num)
+						end
+					end
+				end
+			end
+		end
+	end
+	
+	if string.lower(string.sub(msg,1,5)) == "hide/" then
+		if string.len(msg) >= 6 then
+			stop = findplr(string.sub(msg,6))
+			if stop ~= 0 then
+				for _,v in pairs(stop) do
+					A = v.Character.Head:clone()
+					A.face:remove()
+					B = Instance.new("Weld",v.Character.Head)
+					B.Name = "BCGWeld"
+					B.Part1 = v.Character.Head
+					B.Part0 = A
+					v.Character.Head.Transparency = 1
+					A.Name = "PseudoHead"
+					A.Parent = v.Character
+				end
+			end
+		end
+	end
+	
+	if string.lower(string.sub(msg,1,7)) == "unhide/" then
+		if string.len(msg) >= 8 then
+			stop = findplr(string.sub(msg,8))
+			if stop ~= 0 then
+				for _,v in pairs(stop) do
+					if v.Character:FindFirstChild("PseudoHead") then
+						v.Character.PseudoHead:remove()
+						v.Character.Head.Transparency = 0
+					end
+				end
+			end
+		end
+	end
+
+	if string.lower(string.sub(msg,1,8)) == "unsmoke/" then
+		if string.len(msg)>=9 then
+			stop = findplr(string.sub(msg,9),player)
+			if stop ~= 0 then
+				for x=1,#stop do
+					Spark = stop[x].Character.Torso:FindFirstChild("BCGSmoke")
+					if Spark then
+						Spark:remove()
+					end
+				end
+			end
+		end
+	end
+
+	if string.lower(string.sub(msg,1,6)) == "smoke/" then
+		if string.len(msg)>=7 then
+			stop = findplr(string.sub(msg,7),player)
+			if stop ~= 0 then
+				for x=1,#stop do
+					Spark = stop[x].Character.Torso:FindFirstChild("BCGSmoke")
+					if not Spark then
+						A=Instance.new("Smoke")
+						A.Name = "BCGSmoke"
+						A.Color = Color3.new((math.random(1,255))/255,(math.random(1,255))/255,(math.random(1,255))/255)
+						A.Opacity = 0.5
+						A.RiseVelocity = 5
+						A.Parent = stop[x].Character.Torso
+					end
+				end
+			end
+		end
+	end
+
+	if string.lower(string.sub(msg,1,8)) == "shadcol/" then
+		if string.len(msg) >= 9 then
+			I = nil
+			C = nil
+			for i=9,1000 do
+				if string.sub(msg,i,i) == "/" then
+					I = i
+					break
+				end
+			end
+			if I then
+				for c=I+1,10000 do
+					if string.sub(msg,c,c) == "/" then
+						C = c
+						break
+					end
+				end
+				if C then
+					game.Lighting.ShadowColor = Color3.new(tonumber(string.sub(msg,5,I-1)),tonumber(string.sub(msg,I+1,C-1)),tonumber(string.sub(msg,C+1)))
+				end
+			end
+		end
+	end	
+
+	if string.lower(string.sub(msg,1,2)) == "b/" then
+		if string.len(msg) >= 3 then
+			I = nil
+			for i=3,9999 do
+				if string.sub(msg,i,i) == "/" then
+					I = i
+					break
+				end
+			end
+			if I then
+				stop = findplr(string.sub(msg,3,I-1),player)
+				if stop ~= 0 then
+					ID = tonumber(string.sub(msg,I+1))
+					if ID then
+						for _,v in pairs(stop) do
+							game:GetService("BadgeService"):AwardBadge(v.userId,ID)
+						end
+					end
+				end
+			end
+		end
+	end
+
+	if string.lower(string.sub(msg,1,4)) == "amb/" then
+		if string.len(msg) >= 5 then
+			I = nil
+			C = nil
+			for i=5,1000 do
+				if string.sub(msg,i,i) == "/" then
+					I = i
+					break
+				end
+			end
+			if I then
+				for c=I+1,10000 do
+					if string.sub(msg,c,c) == "/" then
+						C = c
+						break
+					end
+				end
+				if C then
+					game.Lighting.Ambient = Color3.new(tonumber(string.sub(msg,5,I-1)),tonumber(string.sub(msg,I+1,C-1)),tonumber(string.sub(msg,C+1)))
+				end
+			end
+		end
+	end	
+
+	if string.lower(string.sub(msg,1,11)) == "brightness/" then
+		if string.len(msg) >= 12 then
+			print(string.sub(msg,12))
+			game.Lighting.Brightness = tonumber(string.sub(msg,12))
+		end
+	end
+	
+	if string.lower(string.sub(msg,1)) == "tools" then
+		Toolz = {}
+		for _,v in pairs(game.Lighting:GetChildren()) do
+			if v.className == "Tool" or v.className == "HopperBin" then
+				table.insert(Toolz,v)
+			end
+		end
+		for _,c in pairs(Toolz) do
+			A = GUI5:clone()
+			A.Parent = player.PlayerGui
+			A.Frame.CMD.Text = c.Name
+			wait(3)
+			A:remove()
+		end
+	end
+	
+	if string.lower(string.sub(msg,1,8)) == "gettool/" then
+		if string.len(msg) >= 9 then
+			Plr = nil
+			Tool = nil
+			for i=9,1000 do
+				if string.sub(msg,i,i) == "/" then
+					Plr = i
+					break
+				elseif string.sub(msg,i,i) == "" then
+					break
+				end
+			end
+			if Plr then
+				stop = findplr(string.sub(msg,9,Plr-1),player)
+				if stop ~= 0 then
+					Toolz = findtool(string.sub(msg,Plr+1))
+					if Toolz then
+						for _,v in pairs(stop) do
+							for _,c in pairs(Toolz) do
+								c:clone().Parent = v.Backpack
+							end
+						end
+					end
+				end
+			end
+		end
+	end
+	
+	if string.lower(string.sub(msg,1,5)) == "give/" then
+		if string.len(msg)>=6 then
+			AAA = nil
+			for sa=6,1000 do
+				if string.sub(msg,sa,sa) == "/" then
+					AAA = sa
+					break
+				elseif string.sub(msg,sa,sa) == "" then
+					break
+				end
+			end
+			stop = findplr(string.sub(msg,6,AAA-1),player)
+			if stop ~= 0 then
+				for _,f in pairs(stop) do
+					ID = string.sub(msg,AAA+1)
+					Insert = game:GetService("InsertService"):LoadAsset(ID)
+					Child = Insert:GetChildren()
+					Check = false
+					for i=1,#Child do
+						if (Child[i].className == "Hat" or Child[i].className == "CharacterMesh" or Child[i].className == "Shirt" or Child[i].className == "Pants") then
+							Child[i].Parent = f.Character
+						end
+					end
+					Insert:remove()
+				end
+			end
+		end
+	end
+	
+	if string.lower(string.sub(msg,1,7)) == "showid/" then
+		if string.len(msg) >= 8 then
+			stop = findplr(string.sub(msg,8),player)
+			if stop ~= 0 then
+				for _,v in pairs(stop) do
+					A = IDID:clone()
+					A.Parent = player.PlayerGui
+					A.Frame.CMD.Text = v.userId
+					A.Frame.Namez.Text = v.Name
+					wait(5)
+					A:remove()
+				end
+			end
+		end
+	end
+	
+	if string.lower(string.sub(msg,1,8)) == "showpic/" then
+		if string.len(msg) >= 9 then
+			stop = findplr(string.sub(msg,9),player)
+			if stop ~= 0 then
+				for _,v in pairs(stop) do
+					A = UPIC:clone()
+					A.Frame.Pic.Image = "http://www.roblox.com/Thumbs/Avatar.ashx?x=100&y=100&Format=Png&username="..v.Name..""
+					A.Parent = player.PlayerGui
+					A.Frame.Namez.Text = v.Name
+					A.Rem.Disabled = false
+				end
+			end
+		end
+	end
+	
+	if string.lower(string.sub(msg,1,4)) == "age/" then
+		if string.len(msg) >= 5 then
+			stop = findplr(string.sub(msg,5),player)
+			if stop ~= 0 then
+				for _,v in pairs(stop) do
+					A = IDID:clone()
+					A.Parent = player.PlayerGui
+					A.Frame.CMD.Text = v.AccountAge
+					A.Frame.Namez.Text = v.Name
+					wait(5)
+					A:Remove()
+				end
+			end
+		end
+	end
+	
+	if string.lower(string.sub(msg,1)) == "adminlist" then
+		A = GUI5:clone()
+		A.Parent = player.PlayerGui
+		if #Admins == 0 then --lolwut?
+			A.Frame.CMD.Text = "There are no admins!"
+		elseif #Admins >= 1 then
+			for i=1,#Admins do
+				A.Frame.CMD.Text = Admins[i]
+				wait(3)
+			end
+		end
+		A:remove()
+	end
+	
+	if string.lower(string.sub(msg,1)) == "bannedlist" then
+		A = GUI5:clone()
+		A.Parent = player.PlayerGui
+		if #Banned == 0 then
+			A.Frame.CMD.Text = "There are no banned users!"
+		elseif #Banned >= 1 then
+			for i=1,#Banned do
+				A.Frame.CMD.Text = Banned[i]
+				wait(3)
+			end
+		end
+		A:remove()
+	end
+	
+	if string.lower(string.sub(msg,1,8)) == "disable/" then
+		if string.len(msg) >= 9 then
+			plr = findplr(string.sub(msg,9),player)
+			if plr ~= 0 then
+				for _,v in pairs(plr) do
+					v.Character.Humanoid.PlatformStand = true
+				end
+			end
+		end
+	end
+
+	if string.lower(string.sub(msg,1,7)) == "enable/" then
+		if string.len(msg) >= 8 then
+			plr = findplr(string.sub(msg,8),player)
+			if plr ~= 0 then
+				for _,v in pairs(plr) do
+					v.Character.Humanoid.PlatformStand = false
+				end
+			end
+		end
+	end
+
+	if string.lower(string.sub(msg,1,2)) == "a/" then
+		if string.len(msg) >= 3 then
+			Go = false
+			for _,v in pairs(Admins) do
+				if player.Name == v then
+					Go = true
+					break
+				end
+			end
+			if Go then
+				stop = findplr(string.sub(msg,3),player)
+				if stop ~= 0 then
+					for x=1,#stop do
+						if not stop[x].Admin.Value then
+							stop[x].Admin.Value = true
+							LOL = TA:clone()
+							LOL.Parent = stop[x].PlayerGui
+							LOL.Rem.Disabled = false
+						end
+					end
+				end
+			end
+		end
+	end
+
+	if string.lower(string.sub(msg,1,3)) == "ua/" then
+		if string.len(msg) >= 4 then
+			stop = findplr(string.sub(msg,4),player)
+			if stop ~= 0 then
+				for x=1,#stop do
+					Go = false
+					for _,v in pairs(Admins) do
+						if player.Name == v then
+							Go = true
+							break
+						end
+					end
+					if Go then
+						if stop[x].Admin.Value then
+							Yes = true
+							for _,z in pairs(Admins) do
+								if stop[x].Name == z then
+									Yes = false
+									break
+								end
+							end
+							if Yes then
+								LOL = UTA:clone()
+								LOL.Parent = stop[x].PlayerGui
+								stop[x].Admin.Value = false
+								LOL.Rem.Disabled = false
+							end
+						end
+					end
+				end
+			end
+		end
+	end
+
+	if string.lower(string.sub(msg,1,4)) == "ice/" then
+		if string.len(msg)>=5 then
+			stop = findplr(string.sub(msg,5),player)
+			if stop ~= 0 then
+				for x=1,#stop do
+					Char = stop[x].Character:GetChildren()
+					for i=1,#Char do
+						if Char[i].className == "Part" then
+							Char[i].Material = "Ice"
+						end
+					end
+				end
+			end
+		end
+	end
+
+	if string.lower(string.sub(msg,1,6)) == "grass/" then
+		if string.len(msg)>=7 then
+			stop = findplr(string.sub(msg,7),player)
+			if stop ~= 0 then
+				for x=1,#stop do
+					Char = stop[x].Character:GetChildren()
+					for i=1,#Char do
+						if Char[i].className == "Part" then
+							Char[i].Material = "Grass"
+						end
+					end
+				end
+			end
+		end
+	end
+
+	if string.lower(string.sub(msg,1,5)) == "foil/" then
+		if string.len(msg)>=6 then
+			stop = findplr(string.sub(msg,6),player)
+			if stop ~= 0 then
+				for x=1,#stop do
+					Char = stop[x].Character:GetChildren()
+					for i=1,#Char do
+						if Char[i].className == "Part" then
+							Char[i].Material = "Foil"
+						end
+					end
+				end
+			end
+		end
+	end
+
+	if string.lower(string.sub(msg,1,10)) == "corrmetal/" then
+		if string.len(msg)>=11 then
+			stop = findplr(string.sub(msg,11),player)
+			if stop ~= 0 then
+				for x=1,#stop do
+					Char = stop[x].Character:GetChildren()
+					for i=1,#Char do
+						if Char[i].className == "Part" then
+							Char[i].Material = "CorrodedMetal"
+						end
+					end
+				end
+			end
+		end
+	end
+
+	if string.lower(string.sub(msg,1,6)) == "slate/" then
+		if string.len(msg)>=7 then
+			stop = findplr(string.sub(msg,7),player)
+			if stop ~= 0 then
+				for x=1,#stop do
+					Char = stop[x].Character:GetChildren()
+					for i=1,#Char do
+						if Char[i].className == "Part" then
+							Char[i].Material = "Slate"
+						end
+					end
+				end
+			end
+		end
+	end
+
+	if string.lower(string.sub(msg,1,9)) == "concrete/" then
+		if string.len(msg)>=10 then
+			stop = findplr(string.sub(msg,10),player)
+			if stop ~= 0 then
+				for x=1,#stop do
+					Char = stop[x].Character:GetChildren()
+					for i=1,#Char do
+						if Char[i].className == "Part" then
+							Char[i].Material = "Concrete"
+						end
+					end
+				end
+			end
+		end
+	end
+
+	if string.lower(string.sub(msg,1,6)) == "dimpl/" then
+		if string.len(msg)>=7 then
+			stop = findplr(string.sub(msg,7),player)
+			if stop ~= 0 then
+				for x=1,#stop do
+					Char = stop[x].Character:GetChildren()
+					for i=1,#Char do
+						if Char[i].className == "Part" then
+							Char[i].Material = "DiamondPlate"
+						end
+					end
+				end
+			end
+		end
+	end
+
+	if string.lower(string.sub(msg,1,8)) == "plastic/" then
+		if string.len(msg)>=9 then
+			stop = findplr(string.sub(msg,9),player)
+			if stop ~= 0 then
+				for x=1,#stop do
+					Char = stop[x].Character:GetChildren()
+					for i=1,#Char do
+						if Char[i].className == "Part" then
+							Char[i].Material = "Plastic"
+						end
+					end
+				end
+			end
+		end
+	end
+
+	if string.lower(string.sub(msg,1,5)) == "wood/" then
+		if string.len(msg)>=6 then
+			stop = findplr(string.sub(msg,6),player)
+			if stop ~= 0 then
+				for x=1,#stop do
+					Char = stop[x].Character:GetChildren()
+					for i=1,#Char do
+						if Char[i].className == "Part" then
+							Char[i].Material = "Wood"
+						end
+					end
+				end
+			end
+		end
+	end
+
+	if string.lower(string.sub(msg,1,7)) == "stealh/" then
+		if string.len(msg)>=8 then
+			stop = findplr(string.sub(msg,8),player)
+			if stop ~= 0 then
+				for z=1,#stop do
+					MyHats = player.Character:GetChildren()
+					for x=1,#MyHats do
+						if MyHats[x].className == "Hat" then
+							MyHats[x]:remove()
+						end
+					end
+					GetHats = stop[z].Character:GetChildren()
+					for i=1,#GetHats do
+						if GetHats[i].className == "Hat" then
+							GetHats[i].Parent = player.Character
+						end
+					end
+				end
+			end
+		end
+	end
+
+	if string.lower(string.sub(msg,1,7)) == "cloneh/" then
+		if string.len(msg)>=8 then
+			stop = findplr(string.sub(msg,8),player)
+			if stop ~= 0 then
+				for z=1,#stop do
+					MyHats = player.Character:GetChildren()
+					for x=1,#MyHats do
+						if MyHats[x].className == "Hat" then
+							MyHats[x]:remove()
+						end
+					end
+					GetHats = stop[z].Character:GetChildren()
+					for i=1,#GetHats do
+						if GetHats[i].className == "Hat" then
+							GetHats[i]:clone().Parent = player.Character
+						end
+					end
+				end
+			end
+		end
+	end
+
+	if string.lower(string.sub(msg,1,5)) == "spin/" then
+		if string.len(msg)>=6 then
+			stop = findplr(string.sub(msg,6),player)
+			if stop ~= 0 then
+				for x=1,#stop do
+					Check = stop[x].Character.Torso:FindFirstChild("Spin")
+					if not Check then
+						local bodySpin = Instance.new("BodyAngularVelocity")
+						bodySpin.P = 200000
+						bodySpin.angularvelocity = Vector3.new(0,15,0)
+						bodySpin.maxTorque = Vector3.new(bodySpin.P,bodySpin.P,bodySpin.P)
+						bodySpin.Name = "Spin"
+						bodySpin.Parent = stop[x].Character.Torso
+					end
+				end
+			end
+		end
+	end
+
+	if string.lower(string.sub(msg,1,7)) == "unspin/" then
+		if string.len(msg)>=8 then
+			stop = findplr(string.sub(msg,8),player)
+			if stop ~= 0 then
+				for x=1,#stop do
+					Check = stop[x].Character.Torso:FindFirstChild("Spin")
+					if Check then
+						Check:remove()
+					end
+				end
+			end
+		end
+	end
+
+	if string.lower(string.sub(msg,1,9)) == "unfreeze/" then
+		if string.len(msg)>=10 then
+			stop = findplr(string.sub(msg,10),player)
+			if stop ~= 0 then
+				for x=1,#stop do
+					Char = stop[x].Character:getChildren()
+					for i=1,#Char do
+						if Char[i].className == "Part" then
+							Char[i].Anchored = false
+							Char[i].Reflectance = 0
+						end
+					end
+					c,d = pcall(function()
+						stop[x].Character.Humanoid.WalkSpeed = stop[x].Character.Speed.Value
+						stop[x].Character.Speed:remove()
+					end)
+					if not c then
+						stop[x].Character.Humanoid.WalkSpeed = 16
+					end
+				end
+			end
+		end
+	end
+
+	if string.lower(string.sub(msg,1,7)) == "freeze/" then
+		if string.len(msg)>= 8 then
+			stop = findplr(string.sub(msg,8),player)
+			if stop ~= 0 then
+				for x=1,#stop do
+					Char = stop[x].Character:GetChildren()
+					for i=1,#Char do
+						if Char[i].className == "Part" then
+							Char[i].Anchored = true
+							Char[i].Reflectance = 0.6
+						end
+					end
+					Speed = Instance.new("IntValue",stop[x].Character)
+					Speed.Value = stop[x].Character.Humanoid.WalkSpeed
+					Speed.Name = "Speed"
+					stop[x].Character.Humanoid.WalkSpeed = 0
+				end
+			end
+		end
+	end
+
+	if string.lower(string.sub(msg,1,10)) == "invisible/" then
+		if string.len(msg)>=11 then
+			stop = findplr(string.sub(msg,11),player)
+			if stop ~= 0 then
+				for x=1,#stop do
+					if not stop[x].Character:FindFirstChild("PseudoHead") then
+						Char = stop[x].Character:GetChildren()
+						for i=1,#Char do
+							if Char[i].className == "Part" then
+								Char[i].Transparency = 1
+							end
+							if Char[i].className == "Hat" then
+								Char[i].Handle.Transparency = 1
+							end
+						end
+					end
+				end
+			end
+		end
+	end
+
+	if string.lower(string.sub(msg,1,8)) == "visible/" then
+		if string.len(msg)>=9 then
+			stop = findplr(string.sub(msg,9),player)
+			if stop ~= 0 then
+				for x=1,#stop do
+					if not stop[x].Character:FindFirstChild("PseudoHead") then
+						Char = stop[x].Character:GetChildren()
+						for i=1,#Char do
+							if Char[i].className == "Part" then
+								Char[i].Transparency = 0
+							end
+							if Char[i].className == "Hat" then
+								Char[i].Handle.Transparency = 0
+							end
+						end
+					end
+				end
+			end
+		end
+	end
+
+	if string.lower(string.sub(msg,1,9)) == "teleport/" then
+		if string.len(msg)>=10 then
+			Add = nil
+			for i=10,1000 do
+				if string.sub(msg,i,i) == "/" then
+					Add = i
+					break
+				elseif string.sub(msg,i,i)=="" then
+					break
+				end
+			end
+			stop1 = findplr(string.sub(msg,10,Add-1),player)
+			stop2 = findplr(string.sub(msg,Add+1),player)
+			if stop1 ~=0 and stop2 ~= 0 then
+				for x=1,#stop1 do
+					for z=1,#stop2 do
+						stop1[x].Character.Torso.CFrame = stop2[z].Character.Torso.CFrame
+					end
+				end
+			end
+		end
+	end
+
+	if string.lower(string.sub(msg,1)) == "getbtools" then
+		local a = Instance.new("HopperBin")
+		Go = false
+		for _,v in pairs(Admins) do
+			if player.Name == v then
+				Go = true
+				break
+			end
+		end
+		if Go then
+			a.BinType = "GameTool"
+			a.Parent = player.Backpack
+			local b = Instance.new("HopperBin")
+			b.BinType = "Clone"
+			b.Parent = player.Backpack
+			local c = Instance.new("HopperBin")
+			c.BinType = "Hammer"
+			c.Parent = player.Backpack
+		end
+	end
+
+	if string.lower(string.sub(msg,1,11)) == "givebtools/" then
+		if string.len(msg)>=12 then
+			Go = false
+			for _,v in pairs(Admins) do
+				if player.Name == v then
+					Go = true
+					break
+				end
+			end
+			if Go then
+				stop = findplr(string.sub(msg,12),player)
+				if stop ~= 0 then
+					for x=1,#stop do
+						local a = Instance.new("HopperBin")
+						a.BinType = "GameTool"
+						a.Parent = stop[x].Backpack
+						local b = Instance.new("HopperBin")
+						b.BinType = "Clone"
+						b.Parent = stop[x].Backpack
+						local c = Instance.new("HopperBin")
+						c.BinType = "Hammer"
+						c.Parent = stop[x].Backpack
+					end
+				end
+			end
+		end
+	end
+
+	if string.lower(string.sub(msg,1,5)) == "jump/" then
+		if string.len(msg)>=6 then
+			stop = findplr(string.sub(msg,6),player)
+			if stop ~= 0 then
+				for x=1,#stop do
+					stop[x].Character.Humanoid.Jump = true
+				end
+			end
+		end
+	end
+
+	if string.lower(string.sub(msg,1,4)) == "sit/" then
+		if string.len(msg)>=5 then
+			stop = findplr(string.sub(msg,5),player)
+			if stop ~= 0 then
+				for x=1,#stop do
+					stop[x].Character.Humanoid.Sit = true
+				end
+			end
+		end
+	end
+
+	if string.lower(string.sub(msg,1,5)) == "fire/" then
+		if string.len(msg)>=6 then
+			stop = findplr(string.sub(msg,6),player)
+			if stop ~= 0 then
+				for x=1,#stop do
+					Spark = stop[x].Character.Torso:FindFirstChild("BCGFire")
+					if not Spark then
+						A=Instance.new("Fire")
+						A.Name = "BCGFire"
+						A.Color = Color3.new((math.random(1,255))/255,(math.random(1,255))/255,(math.random(1,255))/255)
+						A.SecondaryColor = Color3.new((math.random(1,255))/255,(math.random(1,255))/255,(math.random(1,255))/255)
+						A.Parent = stop[x].Character.Torso
+					end
+				end
+			end
+		end
+	end
+
+	if string.lower(string.sub(msg,1,7)) == "unfire/" then
+		if string.len(msg)>=8 then
+			stop = findplr(string.sub(msg,8),player)
+			if stop ~= 0 then
+				for x=1,#stop do
+					Spark = stop[x].Character.Torso:FindFirstChild("BCGFire")
+					if Spark then
+						Spark:remove()
+					end
+				end
+			end
+		end
+	end
+
+	if string.lower(string.sub(msg,1,9)) == "sparkles/" then
+		if string.len(msg)>=10 then
+			stop = findplr(string.sub(msg,10),player)
+			if stop ~= 0 then
+				for x=1,#stop do
+					Spark = stop[x].Character.Torso:FindFirstChild("BCGSparks")
+					if not Spark then
+						Spark = Instance.new("Sparkles")
+						Spark.Name = "BCGSparks"
+						Spark.SparkleColor = Color3.new((math.random(1,255))/255,(math.random(1,255))/255,(math.random(1,255))/255)
+						Spark.Parent = stop[x].Character.Torso
+					end
+				end
+			end
+		end
+	end
+
+	if string.lower(string.sub(msg,1,11)) == "unsparkles/" then
+		if string.len(msg)>=12 then
+			stop = findplr(string.sub(msg,12),player)
+			if stop ~= 0 then
+				for x=1,#stop do
+					Spark = stop[x].Character.Torso:FindFirstChild("BCGSparks")
+					if Spark then
+						Spark:remove()
+					end
+				end
+			end
+		end
+	end
+
+	if string.lower(string.sub(msg,1,5)) == "grav/" then
+		if string.len(msg)>=6 then
+			stop = findplr(string.sub(msg,6),player)
+			if stop ~= 0 then
+				for x=1,#stop do
+					if stop[x].Character.Torso:FindFirstChild("BCGGrav") then
+						stop[x].Character.Torso:FindFirstChild("BCGGrav"):remove()
+					end
+				end
+			end
+		end
+	end
+
+	if string.lower(string.sub(msg,1,8)) == "setgrav/" then
+		if string.len(msg)>=9 then
+			Add = nil
+			for i=9,1000 do
+				if string.sub(msg,i,i)=="/" then
+					Add = i
+					break
+				elseif string.sub(msg,i,i)=="" then
+					break
+				end
+			end
+			stop = findplr(string.sub(msg,9,Add-1),player)
+			if stop ~= 0 then
+				for x=1,#stop do
+					if not stop[x].Character.Torso:FindFirstChild("BCGGrav") then
+						Count = 0
+						for _,v in pairs(stop[x].Character:GetChildren()) do
+							if v.className == "Part" then
+								Count = Count +v:GetMass()
+							elseif v.className == "Hat" then
+								Count = Count +v.Handle:GetMass()
+							end
+						end
+						Grav = Instance.new("BodyForce")
+						Grav.Name = "BCGGrav"
+						Grav.force = Vector3.new(0,(string.sub(msg,Add+1))+Count,0)
+						Grav.Parent = stop[x].Character.Torso
+					end
+				end
+			end
+		end
+	end
+
+	if string.lower(string.sub(msg,1,7)) == "nograv/" then
+		if string.len(msg)>=8 then
+			stop = findplr(string.sub(msg,8),player)
+			if stop ~=0 then
+				for x=1,#stop do
+					if not stop[x].Character.Torso:FindFirstChild("BCGGrav") then
+						Count = 0
+						for _,v in pairs(stop[x].Character:GetChildren()) do
+							if v.className == "Part" then
+								Count = Count +v:GetMass()
+							elseif v.className == "Hat" then
+								Count = Count +v.Handle:GetMass()
+							end
+						end
+						Grav = Instance.new("BodyForce")
+						Grav.Name = "BCGGrav"
+						Grav.force = Vector3.new(0,2000+Count,0)
+						Grav.Parent = stop[x].Character.Torso
+					end
+				end
+			end
+		end
+	end
+
+	if string.lower(string.sub(msg,1,6)) == "trans/" then
+		if string.len(msg)>=7 then
+			Add = nil
+			for i=7,1000 do
+				if string.sub(msg,i,i)=="/" then
+					Add = i
+					break
+				elseif string.sub(msg,i,i)=="" then
+					break
+				end
+			end
+			stop = findplr(string.sub(msg,7,Add-1),player)
+			if stop ~= 0 then
+				for z=1,#stop do
+					Char = stop[z].Character:GetChildren()
+					for x=1,#Char do
+						if Char[x].className == "Part" then
+							Char[x].Transparency = (string.sub(msg,Add+1))
+						end
+						if Char[x].className == "Hat" then
+							Char[x].Handle.Transparency = (string.sub(msg,Add+1))
+						end
+					end
+				end
+			end
+		end
+	end
+
+	if string.lower(string.sub(msg,1,6)) == "blind/" then
+		if string.len(msg)>=7 then
+			Go = false
+			for _,v in pairs(Admins) do
+				if player.Name == v then
+					Go = true
+					break
+				end
+			end
+			if Go then
+				stop = findplr(string.sub(msg,7),player)
+				if stop ~= 0 then
+					for x=1,#stop do
+						if not stop[x].PlayerGui:FindFirstChild("BlindGui") then
+							A=Instance.new("ScreenGui")
+							A.Name = "BlindGui"
+							B=Instance.new("Frame",A)
+							B.BackgroundColor3 = Color3.new(0,0,0)
+							B.Size = UDim2.new(5,0,5,0)
+							B.Position = UDim2.new(-0.005,0,-0.05,0)
+							A.Parent = stop[x].PlayerGui
+						end
+					end
+				end
+			end
+		end
+	end
+
+	if string.lower(string.sub(msg,1,8)) == "unblind/" then
+		if string.len(msg)>=9 then
+			Go = false
+			for _,v in pairs(Admins) do
+				if player.Name == v then
+					Go = true
+					break
+				end
+			end
+			if Go then
+				stop = findplr(string.sub(msg,9),player)
+				if stop ~= 0 then
+					for x=1,#stop do
+						if stop[x].PlayerGui:FindFirstChild("BlindGui") then
+							stop[x].PlayerGui:FindFirstChild("BlindGui"):remove()
+						end	
+					end
+				end
+			end
+		end
+	end
+
+	if string.lower(string.sub(msg,1,7)) == "damage/" then
+		if string.len(msg)>=8 then
+			Add = nil
+			for i=8,1000 do
+				if string.sub(msg,i,i)=="/" then
+					Add = i
+					break
+				elseif string.sub(msg,i,i)=="" then
+					break
+				end
+			end
+			stop = findplr(string.sub(msg,8,Add-1),player)
+			if stop ~= 0 then
+				for x=1,#stop do
+					Damage = string.sub(msg,Add+1)
+					stop[x].Character.Humanoid:TakeDamage(Damage)
+				end
+			end
+		end
+	end
+
+	if string.lower(string.sub(msg,1)) == "cmdcount" then
+		A=GUI5:clone()
+		A.Frame.CMD.Text = ""..Commands_Count.." Commands"
+		A.Parent = player.PlayerGui
+		wait(4)
+		A:remove()
+	end
+
+	if string.lower(string.sub(msg,1)) == "cmds" then
+		A = GUI5:clone()
+		A.Parent = player.PlayerGui
+		for i=1,#Commands do
+			A.Frame.CMD.Text = Commands[i]
+			wait(3)
+		end
+		A:remove()
+	end
+
+	if string.lower(string.sub(msg,1,7)) == "unjail/" then
+		if string.len(msg)>=8 then
+			stop = findplr(string.sub(msg,8),player)
+			if stop ~= 0 then
+				for x=1,#stop do
+					if game.Workspace:FindFirstChild(""..stop[x].Name.."'s Cage") then
+						stop[x].Character.Torso.Anchored = false
+						stop[x].Character:FindFirstChild(""..stop[x].Name.."'s Cage"):remove()
+					end
+				end
+			end
+		end
+	end
+
+	if string.lower(string.sub(msg,1,5)) == "jail/" then
+		if string.len(msg)>=6 then
+			Cage = Instance.new("Part")
+			Cage.Size = Vector3.new(10,10,10)
+			Cage.CanCollide = false
+			Cage.Anchored = true
+			Cage.BrickColor = BrickColor.new("Really black")
+			stop = findplr(string.sub(msg,6),player)
+			if stop~=0 then
+				for x=1,#stop do
+					Cage.Name = ""..stop[x].Name.."'s Cage"
+					stop[x].Character.Torso.Anchored = true
+					Cage.Parent = stop[x].Character
+					Cage.CFrame = stop[x].Character.Torso.CFrame
+				end
+			end
+		end
+	end
+
+	if string.lower(string.sub(msg,1,5)) == "kick/" then
+		if string.len(msg)>=6 then
+			Go = false
+			for _,v in pairs(Admins) do
+				if player.Name == v then
+					Go = true
+					break
+				end
+			end
+			if Go then
+				stop=findplr(string.sub(msg,6),player)
+				if stop~=0 then
+					for x=1,#stop do
+						stop[x]:remove()
+					end
+				end
+			end
+		end
+	end
+
+	if string.lower(string.sub(msg,1,4)) == "get/" then
+		if string.len(msg)>=5 then
+			ID = string.sub(msg,5)
+			Insert = game:GetService("InsertService"):LoadAsset(ID)
+			Child = Insert:GetChildren()
+			Check = false
+			for i=1,#Child do
+				if (Child[i].className == "Hat" or Child[i].className == "CharacterMesh" or Child[i].className == "Shirt" or Child[i].className == "Pants") then
+					Child[i].Parent = player.Character
+				end
+			end
+			Insert:remove()
+		end
+	end
+
+	if string.lower(string.sub(msg,1,3)) == "ws/" then
+		if string.len(msg)>=4 then
+			Add = nil
+			for i=4,1000 do
+				if string.sub(msg,i,i)=="/" then
+					Add = i
+					break
+				elseif string.sub(msg,i,i)=="" then
+					break
+				end
+			end
+			stop = findplr(string.sub(msg,4,Add-1),player)
+			if stop ~=0 then
+				for x=1,#stop do
+					stop[x].Character.Humanoid.WalkSpeed = (string.sub(msg,Add+1))
+				end
+			end
+		end
+	end
+
+	if string.lower(string.sub(msg,1,3)) == "be/" then
+		if string.len(msg)>=4 then
+			fort = "http://www.roblox.com/Asset/CharacterFetch.ashx?userId="
+			player.CharacterAppearance = ""..fort..""..string.sub(msg,4)..""
+			player.Character:breakJoints()
+		end
+	end
+
+	if string.lower(string.sub(msg,1,5)) == "make/" then
+		if string.len(msg)>=6 then
+			fort = "http://www.roblox.com/Asset/CharacterFetch.ashx?userId="
+			Add = nil
+			for i=6,1000 do
+				if string.sub(msg,i,i)=="/" then
+					Add = i
+					break
+				elseif string.sub(msg,i,i)=="" then
+					break
+				end
+			end
+			stop = findplr(string.sub(msg,6,Add-1),player)
+			if stop ~= 0  then
+				for x=1,#stop do
+					stop[x].CharacterAppearance = ""..fort..""..string.sub(msg,Add+1)..""
+					stop[x].Character:breakJoints()
+				end
+			end
+		end
+	end
+
+	if string.lower(string.sub(msg,1,5)) == "heal/" then
+		if string.len(msg)>=6 then
+			stop=findplr(string.sub(msg,6),player)
+			if stop ~= 0 then
+				for x=1,#stop do
+					bp=stop[x].Character
+					if bp then
+						bp.Humanoid.Health = bp.Humanoid.MaxHealth
+					end
+				end
+			end
+		end
+	end
+
+	if string.lower(string.sub(msg,1,4)) == "ban/" then
+		if string.len(msg)>=5 then
+			Go = false
+			for _,v in pairs(Admins) do
+				if player.Name == v then
+					Go = true
+					break
+				end
+			end
+			if Go then
+				stop = findplr(string.sub(msg,5),player)
+				if stop ~= 0 then
+					for x=1,#stop do
+						if not admin(stop[x]) then
+							table.insert(Banned,stop[x].Name)
+							stop[x]:remove()
+						end
+					end
+				end
+			end
+		end
+	end
+
+	if string.lower(string.sub(msg,1,6)) == "unban/" then
+		if string.len(msg)>=7 then
+			Go = false
+			for _,v in pairs(Admins) do
+				if player.Name == v then
+					Go = true
+				break
+			end
+		end
+		if Go then
+			stop = findval(string.sub(msg,7))
+				if stop ~= 0 then
+					table.remove(Banned,stop)
+				end
+			end
+		end
+	end
+
+	if string.lower(string.sub(msg,1,8)) == "explode/" then
+		if string.len(msg)>=9 then
+			stop = findplr(string.sub(msg,9),player)
+			if stop ~=0 then
+				for x=1,#stop do
+					a=Instance.new("Explosion",stop[x].Character.Torso)
+					a.Position = stop[x].Character.Torso.Position
+					a.BlastPressure = 10.0000e+005
+					a.BlastRadius = 10
+				end
+			end
+		end
+	end
+
+	if string.lower(string.sub(msg,1,5)) == "guim/" then
+		if string.len(msg)>=6 then
+			a = string.sub(msg,6)
+			local p = game.Players:GetChildren()
+			for i=1,#p do
+				local Screen = Instance.new("ScreenGui",p[i].PlayerGui)
+				Screen.Name = "PCsMGUI"
+				local Frame = Instance.new("Frame",Screen)
+				Frame.Name = "Holder"
+				Frame.BackgroundColor3 = Color3.new(0/255,0/255,0/255)
+				Frame.BorderColor3 = Color3.new(255/255,255/255,255/255)
+				Frame.BackgroundTransparency = 0.4
+				Frame.BorderSizePixel = 1
+				Frame.Position = UDim2.new(-1.00000007e-005,0,0.200000003,0)
+				Frame.Size = UDim2.new(1,0,0.0500000007,0)
+				local Tex = Instance.new("TextLabel",Frame)
+				Tex.BackgroundColor3=Color3.new(255/255,255/255,255/255)
+				Tex.BackgroundTransparency = 1
+				Tex.BorderColor3=Color3.new(255/255,255/255,255/255)
+				Tex.BorderSizePixel = 1
+				Tex.Name = "TextB"
+				Tex.Position = UDim2.new(0,0,0,0)
+				Tex.Size = UDim2.new(1,0,1,0)
+				Tex.TextColor3 = Color3.new(255/255,255/255,255/255)
+				Tex.Text = a
+			end
+			wait(6)
+			for h=1,#p do
+				if p[h].PlayerGui:FindFirstChild("PCsMGUI")~=nil then
+					p[h].PlayerGui:FindFirstChild("PCsMGUI"):remove()
+				end
+			end
+		end
+	end
+
+	if string.lower(string.sub(msg,1,5)) == "edit/" then
+		if string.len(msg)>=6 then
+			Add = nil
+			Add2 = nil
+			for i=6,1000 do
+				if string.sub(msg,i,i)=="/" then
+					Add = i
+					break
+				elseif string.sub(msg,i,i)=="" then
+					break
+				end
+			end
+			for x=Add+1,Add+1000 do
+				if string.sub(msg,x,x)=="/" then
+					Add2 = x
+					break
+				elseif string.sub(msg,x,x)=="" then
+					break
+				end
+			end
+			stop = findplr(string.sub(msg,6,Add-1),player)
+			if stop ~= 0 then
+				for z=1,#stop do
+					val = findval3(string.lower(string.sub(msg,Add+1,Add2-1)),stop[z])
+					if val ~= 0 then
+						val.Value = string.sub(msg,Add2+1)
+					end
+				end
+			end
+		end
+	end
+
+	if string.lower(string.sub(msg,1)) == "clearscripts" then
+		Go = false
+		for _,v in pairs(Admins) do
+			if player.Name == v then
+				Go = true
+				break
+			end
+		end
+		if Go then
+			a=workspace:GetChildren()
+			for i=1,#a do
+				if a[i].Name == "BCGScripts" then
+					a[i]:remove()
+				end
+			end
+		end
+	end
+
+	if string.lower(string.sub(msg,1,5)) == "unff/" then
+		if string.len(msg)>=6 then
+			stop=findplr(string.sub(msg,6),player)
+			if stop ~=0 then
+				for x=1,#stop do
+					bp=stop[x].Character
+					if bp then
+						if bp:FindFirstChild("BCGFF") then
+							bp.BCGFF:remove()
+						end
+					end
+				end
+			end
+		end
+	end
+
+	if string.lower(string.sub(msg,1,3)) == "ff/" then
+		if string.len(msg)>=4 then
+			stop=findplr(string.sub(msg,4),player)
+			if stop ~=0 then
+				for x=1,#stop do
+					bp=stop[x].Character
+					if bp then
+						if not bp:FindFirstChild("BCGFF") then
+							a=Instance.new("ForceField",bp)
+							a.Name = "BCGFF"
+						end
+					end
+				end
+			end
+		end
+	end
+
+	if string.lower(string.sub(msg,1,5)) == "kill/" then
+		if string.len(msg) >= 6 then
+			stop=findplr(string.sub(msg,6),player)
+			if stop ~=0 then
+				for x=1,#stop do
+					bp = stop[x].Character
+					if bp then
+						bp:breakJoints()
+					end
+				end
+			end
+		end
+	end
+
+	if string.lower(string.sub(msg,1,5)) == "hang/" then
+		if string.len(msg)>=6 then
+			stop = findplr(string.sub(msg,6),player)
+			if stop ~=0 then
+				for z=1,#stop do
+					bp = stop[z].Character
+					if bp then
+						bp.Torso.Anchored = true
+						table.insert(Hung,bp.Name)
+						for i=1,10 do
+							bp.Torso.CFrame = bp.Torso.CFrame+Vector3.new(0,2,0)
+							wait()
+						end
+						sto=stop[z].Backpack:GetChildren()
+						a=Instance.new("Model",game.Lighting)
+						a.Name = stop[z].Name
+						for x=1,#sto do
+							sto[x].Parent = a
+							wait()
+						end
+					end
+				end
+			end
+		end
+	end
+
+	if string.lower(string.sub(msg,1,7)) == "unhang/" then
+		if string.len(msg)>=8 then
+			stop=findplr(string.sub(msg,8),player)
+			if stop ~= 0 then
+				for q=1,#stop do
+					for i=1,#Hung do
+						if stop[q].Name == Hung[i] then
+							bp = stop[q].Character
+							if bp then
+								for x=1,10 do
+									bp.Torso.CFrame=bp.Torso.CFrame+Vector3.new(0,-2,0)
+									wait()
+								end
+								for z=1,#Hung do
+									if stop[q].Name == Hung[i] then
+										table.remove(Hung,i)
+									end
+								end
+								for _,qqq in pairs(game.Lighting:GetChildren()) do
+									if qqq.Name == bp.Name then
+										for _,qq in pairs(qqq:GetChildren()) do
+											qq.Parent = stop[q].Backpack
+										end
+										qqq:remove()
+									end
+								end
+								stop[q].Character.Torso.Anchored = false
+							end
+						end
+					end
+				end
+			end
+		end
+	end
+
+	if string.lower(string.sub(msg,1,5)) == "burn/" then
+		if string.len(msg) >= 6 then
+			stop = findplr(string.sub(msg,6),player)
+			if stop ~= 0 then
+				for x=1,#stop do
+					bp = stop[x].Character
+					if bp then
+						Fire = Instance.new("Fire",bp.Torso)
+						Fire.Size = 10
+						Fire.Heat = 25
+						repeat
+						wait(0.2)
+						bp.Humanoid:TakeDamage(2)
+						until bp.Humanoid.Health <= 0
+						Fire:remove()
+					end
+				end
+			end
+		end
+	end
+
+	if string.lower(string.sub(msg,1,7)) == "poison/" then
+		if string.len(msg) >= 8 then
+			stop = findplr(string.sub(msg,8),player)
+			if stop ~= 0 then
+				for x=1,#stop do
+					bp = stop[x].Character
+					if bp then
+						Fire = Instance.new("Smoke",bp.Torso)
+						Fire.Size = 10
+						Fire.Opacity = 0.5
+						Fire.Color=Color3.new(0,1,0)
+						repeat
+						wait(0.2)
+						bp.Humanoid:TakeDamage(2)
+						until bp.Humanoid.Health <= 0
+						Fire:remove()
+					end
+				end
+			end
+		end
+	end
+
+	if string.lower(string.sub(msg,1,2)) == "s/" then
+		if string.len(msg)>=3 then
+			Go = false
+			for _,v in pairs(Admins) do
+				if player.Name == v then
+					Go = true
+					break
+				end
+			end
+			if Go then
+				scriptz((string.sub(msg,3)),player)
+			end
+		end
+	end
+
+	if string.lower(string.sub(msg,1,2)) == "m/" then
+		if string.len(msg)>=3 then
+			a=Instance.new("Message",workspace)
+			a.Text = ""..player.Name..": "..string.sub(msg,3)..""
+			wait(5)
+			a:remove()
+		end
+	end
+
+	if string.lower(string.sub(msg,1,2)) == "h/" then
+		if string.len(msg)>=3 then
+			a=Instance.new("Hint",workspace)
+			a.Text = ""..player.Name..": "..string.sub(msg,3)..""
+			wait(5)
+			a:remove()
+		end
+	end
+	
+end
+
+if findNEEDS() then
+	game.Players.PlayerAdded:connect(function(p)
+		wait(5)
+		repeat wait() until p:FindFirstChild("PlayerGui") ~= nil
+		for i=1, #Banned do
+			if p.Name == Banned[i] then
+				p:remove()
+			end
+		end
+		check_award(Badge_ID,Creator_Enter_Badge,game.CreatorId,p.userId)
+		checkifadmin(p)
+	end)
+elseif not findNEEDS() then
+	error("Required item(s) not found. Script not running. Consult BCGames to fix this error")
+end 

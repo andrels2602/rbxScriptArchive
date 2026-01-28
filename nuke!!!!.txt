@@ -1,0 +1,16 @@
+-- Nuke Script made by halomeny. Press "Play" In studio to work :)
+
+local p = Instance.new("Part") 
+p.Parent = game.Workspace 
+p.Name = "Nuke" 
+p.Shape = "Ball" 
+p.Size = Vector3.new(3,3,3) 
+p.BrickColor = BrickColor.new("Really black") 
+p.TopSurface, p.BottomSurface = 0, 0 
+p.Anchored = true 
+
+local e = Instance.new("Explosion") 
+e.Parent = game.Workspace 
+e.Position = p.Position 
+e.BlastPressure = 999999999 
+e.BlastRadius = 999999999 

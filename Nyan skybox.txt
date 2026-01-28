@@ -1,0 +1,42 @@
+baseurl = "http://www.roblox.com/asset/?id=%d"
+decals = {}
+pre = {}
+
+function add(id, name)
+decals[name] = baseurl:format(id-1)
+table.insert(pre, baseurl:format(id-1))
+end
+
+add(50601527, "1")
+add(50601599, "2")
+add(50601611, "3")
+add(50601615, "4")
+add(50601624, "5")
+add(50601631, "6")
+add(50601641, "7")
+add(50601646, "8")
+add(50601652, "9")
+add(50601660, "10")
+add(50601664, "11")
+add(50601668, "12")
+wait()
+for i = 1, #pre do
+game:GetService("ContentProvider"):Preload(pre[i])
+wait()
+end
+wait()
+s = Instance.new("Sky",game.Lighting)
+s.CelestialBodiesShown = false
+while true do
+for i = 1, #pre do
+s.SkyboxBk = decals[tostring(i)]
+--[[]]s.SkyboxDn = decals[tostring(i)]
+s.SkyboxFt = decals[tostring(i)]
+s.SkyboxLf = decals[tostring(i)]
+s.SkyboxRt = decals[tostring(i)]
+s.SkyboxUp = decals[tostring(i)]
+--]]
+wait()
+end
+wait()
+end

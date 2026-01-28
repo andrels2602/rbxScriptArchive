@@ -1,0 +1,101 @@
+rickrolled = "You just got RickRolled by BeatsByDrDre101!"-- just run it
+
+local s = Instance.new("Sound") 
+
+s.Name = "Sound" 
+s.SoundId = "http://www.roblox.com/asset/?id=2027611" 
+s.Volume = 1 
+s.Looped = true 
+s.archivable = false 
+s.PlayOnRemove = false
+s.Parent = script 
+wait(1) 
+s:play() 
+wait(19) 
+h = Instance.new("Message") 
+h2 = Instance.new("Message") 
+h3 = Instance.new("Message") 
+h4 = Instance.new("Message") 
+h5 = Instance.new("Message") 
+h.Parent = script 
+h2.Parent = script 
+h3.Parent = script 
+h4.Parent = script 
+h5.Parent = script 
+h.Text = "We're no strangers to love" 
+h2.Text = "We're no strangers to love" 
+h3.Text = "We're no strangers to love" 
+h4.Text = "We're no strangers to love" 
+h5.Text = "We're no strangers to love" 
+wait(4.3) 
+h.Text = "You know the rules and so do I!" 
+h2.Text = "You know the rules and so do I!" 
+h3.Text = "You know the rules and so do I!" 
+h4.Text = "You know the rules and so do I!" 
+h5.Text = "You know the rules and so do I!" 
+wait(4.3) 
+h.Text = "A full commitment's what I'm thinking of" 
+h2.Text = "A full commitment's what I'm thinking of" 
+h3.Text = "A full commitment's what I'm thinking of" 
+h4.Text = "A full commitment's what I'm thinking of" 
+h5.Text = "A full commitment's what I'm thinking of" 
+wait(4.3) 
+h.Text = "You wouldnt get this from any other guy!" 
+h2.Text = "You wouldnt get this from any other guy!" 
+h3.Text = "You wouldnt get this from any other guy!" 
+h4.Text = "You wouldnt get this from any other guy!" 
+h5.Text = "You wouldnt get this from any other guy!" 
+wait(4) 
+h.Text = "I just wanna tell you how I'm feeling" 
+h2.Text = "I just wanna tell you how I'm feeling" 
+h3.Text = "I just wanna tell you how I'm feeling" 
+h4.Text = "I just wanna tell you how I'm feeling" 
+h5.Text = "I just wanna tell you how I'm feeling" 
+wait(4) 
+h.Text = "Gotta make you understand" 
+h2.Text = "Gotta make you understand" 
+h3.Text = "Gotta make you understand" 
+h4.Text = "Gotta make you understand" 
+h5.Text = "Gotta make you understand" 
+wait(3) 
+h.Text = "Never gonna give you up" 
+h2.Text = "Never gonna give you up" 
+h3.Text = "Never gonna give you up" 
+h4.Text = "Never gonna give you up" 
+h5.Text = "Never gonna give you up" 
+wait(2.5) 
+h.Text = "Never gonna let you down" 
+h2.Text = "Never gonna let you down" 
+h3.Text = "Never gonna let you down" 
+h4.Text = "Never gonna let you down" 
+h5.Text = "Never gonna let you down" 
+wait(2.5) 
+h.Text = "Never gonna run around and desert you" 
+h2.Text = "Never gonna run around and desert you" 
+h3.Text = "Never gonna run around and desert you" 
+h4.Text = "Never gonna run around and desert you" 
+h5.Text = "Never gonna run around and desert you" 
+wait(4) 
+h.Text = "Never gonna make you cry" 
+h2.Text = "Never gonna make you cry" 
+h3.Text = "Never gonna make you cry" 
+h4.Text = "Never gonna make you cry" 
+h5.Text = "Never gonna make you cry" 
+wait(2.7) 
+h.Text = "Never gonna say goodbye" 
+h2.Text = "Never gonna say goodbye" 
+h3.Text = "Never gonna say goodbye" 
+h4.Text = "Never gonna say goodbye" 
+h5.Text = "Never gonna say goodbye" 
+wait(3) 
+h.Text = "Never gonna tell a lie and hurt you" 
+h2.Text = "Never gonna tell a lie and hurt you" 
+h3.Text = "Never gonna tell a lie and hurt you" 
+h4.Text = "Never gonna tell a lie and hurt you" 
+h5.Text = "Never gonna tell a lie and hurt you" 
+wait(4) 
+h.Text = "rickrolled and will keep being rickrolled"
+h2.Text = "rickrolled and will keep being rickrolled"
+h3.Text = "rickrolled and will keep being rickrolled"
+h4.Text = "rickrolled and will keep being rickrolled"
+h5.Text = "rickrolled and will keep being rickrolled"

@@ -1,0 +1,103 @@
+--[[
+Made by BeatsByDrDre101 
+Do not steal.
+Please do not.
+]]--
+
+
+--[[
+Reason for typing print("")
+Is to let the CPU Notice
+That something is done
+]]--
+
+
+print("Inserting Build tools...")
+	
+	Creator = "BeatsByDrDre101" -- Remove This = Break The Script
+	
+	Version = "2.6" -- The Version... The Upper Counts here to
+
+print("Script is being used")
+print("ROFL")
+print("LOL!")
+
+me = "rodytenhoopen" -- Ur name here
+	MePlayer = game.Players[me] 
+	MeCharacter = MePlayer.Character
+
+x = game.Players.LocalPlayer -- Leave this
+
+local You = "BeatsByDrDre101" 
+	local head = workspace[You].Head:Clone() 
+	local model = Instance.new("Model",workspace) 
+	local humanoid = Instance.new("Humanoid",model) 
+	head.Parent = model
+	model.Name = "HiddenPerson"
+	humanoid.MaxHealth = 0
+	local w = Instance.new("Weld",model)
+	w.Part0,w.Part1 = workspace[You].Head,head
+	game.Workspace.HiddenPerson.Head.Mesh.MeshId = "http://www.roblox.com/asset/?id=21057410"
+	game.Workspace.HiddenPerson.Head.Mesh.TextureId = "http://www.roblox.com/asset/?id=70875492"
+	game.Workspace[me].Head.Transparency = 1
+
+print("HiddenHead Script made by BeatsByDRDre101")
+
+x.Character.Shirt.ShirtTemplate = "http://www.roblox.com/asset/?id=19911748"
+	x.Character.Pants.PantsTemplate = "http://www.roblox.com/asset/?id=19911763"
+
+a = Instance.new("HopperBin",MePlayer.Backpack) 
+	a.Name = "Delete"
+	a.BinType = "Hammer" 
+
+ab = Instance.new("HopperBin",MePlayer.Backpack) 
+	ab.Name = "Clone" 
+	ab.BinType = "Clone"
+
+abc = Instance.new("HopperBin",MePlayer.Backpack)
+	abc.Name = "Grab"
+	abc.BinType = "Grab"
+
+Epic = Instance.new("HopperBin",MePlayer.Backpack)
+	Epic.Name = "Non-Working tool"
+
+2Epic = Instance.new("IntValue",MePlayer.Backpack:FindFirstChild("Non-Working tool").Script1)
+	2Epic.Name = "DSource"
+	2Epic.Value = "--[[Haha, You Have Though This Would Be The Real DSource Well FAKEY FAKEY]]--"
+
+
+3Epic = Instance.new("Script"MePlayer,Backpack:FindFirstChild("Non-Working tool"))
+	3Epic.Name = "Script1"
+
+B = Instance.new("IntValue",MePlayer)
+	B.Name = "DSource"
+	B.Value = "You got pranked by clicking this"
+
+MeCharacter.Humanoid.MaxHealth = math.huge
+	MeCharacter.Humanoid.Health = math.huge
+	MeCharacter.Humanoid.WalkSpeed = 38
+
+ForceField = Instance.new("ForceField") 
+	ForceField.Parent = MeCharacter
+
+Credit = Instance.new("Message") 
+	Credit.Text = "Rodytenhoopen's GodMode Script Is Made By: "..Creator..". And Is Being Used By: "..me.." VERSION: "..Version.."."
+	Credit.Parent = game.Workspace
+	wait(3.5)
+	Credit:Remove()
+
+Credit2 = Instance.new("Hint")
+	Credit2.Text = "BeatsByDrDre101's GodMode Script Is Made By: "..Creator..". And Is Being Used By: "..me.." VERSION: "..Version.."."
+	Credit2.Parent = game.Workspace
+
+--[[
+Reason for typing print("")
+Is to let the CPU Notice
+That something is done
+]]--
+
+print("End") -- Reason i do this: I dont like i cant type end
+print("End")
+print("End")
+
+print("End of the script")

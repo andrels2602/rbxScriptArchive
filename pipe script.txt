@@ -1,0 +1,215 @@
+-----------PIPE------------
+
+local center = workspace.BeatsByDrDre101.Head.Position + Vector3.new(0,2.5,0)
+local R = 30
+local r = 10
+
+for t = 0,7.2,0.25 do
+for u = 1,36 do
+local x = math.cos(t)*(R+r*math.cos(u))
+local z = math.sin(t)*(R+r*math.cos(u))
+local y = r*math.sin(u^2)
+local pos = Vector3.new(x,y,z) + center
+local lookAt = center + Vector3.new(math.cos(t)*R,0,math.sin(t)*R)
+local p = Instance.new("Part",workspace)
+p.FormFactor = "Symmetric"
+p.Size = Vector3.new(7,10,1)
+p.TopSurface = "Smooth"
+p.BrickColor = BrickColor.new("Cyan")
+p.BottomSurface = "Smooth"
+p.Anchored = true
+p.CFrame = CFrame.new(pos,lookAt)*CFrame.Angles(0,0,math.rad(90))
+end
+wait(0.1)
+end
+
+
+
+
+----------------ROSE IN THE GROUND--------------
+
+local c = 0
+local r
+local r2
+local h = 5
+local colors = {"Bright red","Bright blue"}
+local parts = {}
+
+for i = 1, 36, .1 do
+h = h - 0.025
+math.randomseed(tick())
+local s = Instance.new("SpawnLocation",workspace)
+s.Anchored = true
+s.FormFactor = "Symmetric"
+s.Anchored = true
+s.TopSurface = "Smooth"
+s.BottomSurface = "Smooth"
+r = math.sin(i^2)*50
+r2 = math.cos(i^2)*50
+s.Size = Vector3.new(1,1,1)
+if c == 0 then
+c = 1
+s.BrickColor = BrickColor.new("Bright red")
+s.TeamColor = BrickColor.new("Bright red")
+s.CFrame = CFrame.new(Vector3.new(r,h,r2))
+elseif c == 1 then
+c = 0
+s.BrickColor = BrickColor.new("Bright blue")
+s.TeamColor = BrickColor.new("Bright blue")
+s.CFrame = CFrame.new(Vector3.new(r,h,r2))
+end
+table.insert(parts,#parts+1,s)
+end
+
+function drawline(pos1, pos2, color)
+local b = Instance.new("Part")
+b.Parent = workspace
+b.Anchored = true
+b.FormFactor = "Symmetric"
+b.BrickColor = BrickColor.new(color)
+b.Size = Vector3.new(8,(pos1-pos2).magnitude,1)
+b.CFrame = CFrame.new((pos2+pos1)/2,pos1)*CFrame.Angles(math.rad(90),0,0)
+b.Transparency = 0
+b.TopSurface = "Smooth"
+b.BottomSurface = "Smooth"
+end
+
+local stuff = 0
+
+for i = 1, #parts-1 do
+if stuff == 0 then
+stuff = 1
+drawline(parts[i].Position, parts[i+1].Position,"Bright blue")
+else
+stuff = 0
+drawline(parts[i].Position, parts[i+1].Position,"Bright red")
+end
+end
+
+for _,v in pairs(workspace:GetChildren()) do
+if v.className == "SpawnLocation" then
+v:Destroy()
+end
+end
+
+
+
+
+--------------------EXPLODE ON DEATH COMMANDS----------------------
+
+
+--Say explode:PLAYERNAME to give them explode on death powers
+local admins = {"BeatsByDrDre101",""}
+
+function explode(name)
+workspace[name].Humanoid.Died:connect(function()
+exp = Instance.new("Explosion",workspace)
+exp.Position = workspace[name].Torso.Position
+exp.BlastPressure = 5
+exp.BlastRadius = 6
+blahwait(name)
+end)
+end
+
+function blahwait(name)
+repeat wait(0.5) until workspace:findFirstChild(name) and workspace[name].Humanoid.Health > 0
+explode(name)
+end
+
+function commands(robloxian)
+for i = 1, #admins do
+if admins[i] == robloxian.Name then
+robloxian.Chatted:connect(function(msg, speaker)
+if string.sub(msg, 1, 8):lower() == "explode:" then
+na = string.sub(msg,9)
+if game.Players:findFirstChild(na) then
+explode(na)
+end end end) end end end
+
+
+for _, v in pairs(game.Players:GetChildren()) do
+for i = 1, #admins do
+if v.Name == admins[i] then
+commands(v)
+end
+end
+end
+
+game.Players.ChildAdded:connect(function(newplayer)
+commands(newplayer)
+end)
+
+
+
+
+----------------DRAGON BALL Z KI BLAST-------------------
+
+
+
+name = "BeatsByDrDre101"
+if script.Parent.className ~= "HopperBin" then
+Instance.new("HopperBin", game.Players[name].Backpack).Name = "KiBlast"
+script.Parent = game.Players[name].Backpack["KiBlast"]
+end
+local player = script.Parent.Parent.Parent
+local char = player.Character
+local torso = char.Torso
+local energycolor = "Bright yellow"
+local speed = 12
+local damage = 4
+local reqdist = 10
+local debounce = false
+local mouseUp = true
+local RT = 0.15
+
+
+script.Parent.Selected:connect(function(mouse)
+mouse.Button1Down:connect(function()
+mouseUp = false
+repeat
+wait(RT)
+local p = Instance.new("Part", workspace)
+p.Size = Vector3.new(1,1,1)
+p.TopSurface = "Smooth"
+p.BottomSurface = "Smooth"
+p.Shape = "Ball"
+p.Anchored = true
+p.BrickColor = BrickColor.new(energycolor)
+p.Name = "Energy"
+p.Transparency = 0.15
+local m = Instance.new("SpecialMesh", p)
+m.MeshType = "Sphere"
+m.Scale = Vector3.new(3,3,3)
+fire(p, mouse.Hit.p)
+until mouseUp
+end)
+mouse.Button1Up:connect(function()
+mouseUp = true
+end)
+end)
+
+function fire(part, pos)
+coroutine.resume(coroutine.create(function()
+part.CFrame = CFrame.new(torso.Position + CFrame.new(torso.Position, pos).lookVector*5)
+local hit, newpos = Workspace:FindPartOnRay(Ray.new(part.Position,(CFrame.new(part.Position,pos).lookVector * (Max or 500))), part)
+for i = 1, 200 do
+part.CFrame = CFrame.new(part.Position + CFrame.new(part.Position,newpos).lookVector * (speed))
+part.CFrame = CFrame.new(part.Position, newpos)
+wait(0.01)
+if (part.Position - newpos).magnitude <= 6 then
+break
+end
+end
+for _,v in pairs(game.Players:GetChildren()) do
+local pt = v.Character:findFirstChild("Torso")
+local ph = v.Character:findFirstChild("Humanoid")
+if pt and ph and (pt.Position - part.Position).magnitude <= reqdist then
+ph.Health = ph.Health - damage
+end
+end
+local e = Instance.new("Explosion",workspace)
+e.Position = part.Position
+e.BlastRadius = 10
+part:Destroy()
+end))
+end
